@@ -18,49 +18,52 @@ import {
 
 const successStories = [
   {
-    client: 'FinTech Startup',
-    project: 'PaieCashPlay Platform',
-    challenge: 'Scalabilité et sécurité des paiements',
-    solution: 'Architecture microservices sur Google Cloud',
+    client: 'PaieCash',
+    project: 'PaieCash-QR Supermarché',
+    challenge: 'Gestion manuelle des stocks et ventes',
+    solution: 'Solution digitale avec QR-code et dashboard',
     results: [
-      '10,000+ transactions/seconde',
-      '99.9% uptime garanti',
-      '40% réduction coûts infrastructure',
-      'Conformité PCI-DSS'
+      'Gestion automatisée des produits',
+      'Dashboard temps réel pour admin/caissier',
+      'API REST sécurisée',
+      'Réduction erreurs de 80%'
     ],
-    tech: ['Google Cloud Run', 'Kubernetes', 'Cloud SQL', 'Security Command Center'],
+    tech: ['ExpressJS', 'Sequelize', 'Angular 16', 'NgRx'],
     timeline: '3 mois',
-    roi: '300%'
+    roi: '200%',
+    link: 'https://paiecash.com/'
   },
   {
-    client: 'Gaming Company',
-    project: 'SDK Games Africa',
-    challenge: 'Distribution globale et performance',
-    solution: 'CDN global avec auto-scaling',
+    client: 'PaieCashPlay',
+    project: 'WebSSO Authentication',
+    challenge: 'Authentification centralisée multi-plateformes',
+    solution: 'Solution WebSSO avec NextJS et Google Cloud',
     results: [
-      '50+ jeux intégrés',
-      'Latence < 50ms mondiale',
-      '60% amélioration performance',
-      'SDK adopté par 200+ développeurs'
+      'Authentification centralisée',
+      'Sécurité renforcée',
+      'Expérience utilisateur unifiée',
+      'Réduction temps connexion 70%'
     ],
-    tech: ['Cloud CDN', 'Firebase', 'Cloud Functions', 'Analytics'],
+    tech: ['NextJS', 'Google Cloud Storage', 'WebSSO', 'OAuth'],
+    timeline: '2 mois',
+    roi: '300%',
+    link: 'https://auth.paiecashplay.com'
+  },
+  {
+    client: 'SmartestLotto',
+    project: 'Architecture AWS Complète',
+    challenge: 'Scalabilité et haute disponibilité pour loterie',
+    solution: 'Infrastructure AWS avec Load Balancing et Lambda',
+    results: [
+      'Auto-scaling automatique',
+      'Haute disponibilité 99.9%',
+      'Performance optimisée',
+      'Coûts réduits de 40%'
+    ],
+    tech: ['AWS Lambda', 'Elastic Beanstalk', 'Load Balancer', 'CloudWatch'],
     timeline: '4 mois',
-    roi: '250%'
-  },
-  {
-    client: 'AgriTech PME',
-    project: 'AGRO-PME Digital',
-    challenge: 'Digitalisation et IoT agricole',
-    solution: 'Plateforme IoT avec ML prédictif',
-    results: [
-      '500+ agriculteurs connectés',
-      '30% augmentation rendement',
-      'Prédictions météo précises',
-      'Réduction gaspillage 25%'
-    ],
-    tech: ['IoT Core', 'BigQuery', 'AI Platform', 'Cloud Storage'],
-    timeline: '6 mois',
-    roi: '400%'
+    roi: '350%',
+    link: 'https://smartestlotto.io'
   }
 ]
 

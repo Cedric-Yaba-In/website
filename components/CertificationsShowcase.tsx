@@ -98,7 +98,11 @@ export default function CertificationsShowcase() {
                     <CardHeader className="pb-4">
                       <div className="flex items-start space-x-4">
                         <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
-                          <CategoryIcon className="w-8 h-8 text-blue-600" />
+                          <img 
+                            src={cert.issuerLogo} 
+                            alt={`${cert.issuer} logo`}
+                            className="w-10 h-10 object-contain"
+                          />
                         </div>
                         <div className="flex-1 min-w-0">
                           <CardTitle className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">

@@ -2,6 +2,7 @@ export interface Certification {
   id: string
   title: string
   issuer: string
+  issuerLogo: string
   date: string
   level: 'foundation' | 'associate' | 'professional' | 'expert'
   category: 'cloud' | 'development' | 'management' | 'marketing'
@@ -16,15 +17,30 @@ export const certifications: Certification[] = [
   // Google Cloud Platform
   {
     id: 'gcp-professional-architect',
-    title: 'Professional Cloud Architect',
+    title: 'Google Professional Cloud Architect',
     issuer: 'Google Cloud',
-    date: '2025',
+    issuerLogo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg',
+    date: 'Février 2025',
     level: 'professional',
     category: 'cloud',
     badge: '/assets/certifs/Professional-Cloud-Architect.png',
     skills: ['Architecture Design', 'Multi-Cloud', 'Security', 'Cost Optimization'],
     businessValue: 'Conception d\'architectures cloud évolutives et sécurisées',
-    clientBenefit: 'Réduction des coûts infrastructure de 30-50% et amélioration de la disponibilité'
+    clientBenefit: 'Amélioration scalabilité de 300% et optimisation des coûts'
+  },
+  
+  {
+    id: 'pmp-in-progress',
+    title: 'PMP (Project Management Professional)',
+    issuer: 'PMI',
+    issuerLogo: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/PMI_logo.svg',
+    date: 'En cours',
+    level: 'professional',
+    category: 'management',
+    badge: '/assets/certifs/pmp-logo.png',
+    skills: ['Project Management', 'Leadership', 'Risk Management', 'Agile'],
+    businessValue: 'Gestion de projets complexes avec méthodologies internationales',
+    clientBenefit: 'Taux de réussite projet de 95% dans les délais'
   },
   
   // AWS Certifications
@@ -32,7 +48,8 @@ export const certifications: Certification[] = [
     id: 'aws-cloud-practitioner',
     title: 'AWS Cloud Practitioner',
     issuer: 'Amazon Web Services',
-    date: '2024',
+    issuerLogo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
+    date: 'Novembre 2024',
     level: 'foundation',
     category: 'cloud',
     badge: '/assets/certifs/notion-essentiel-cloud-practitionner.png',
@@ -42,25 +59,13 @@ export const certifications: Certification[] = [
     clientBenefit: 'Migration sécurisée vers AWS avec optimisation des coûts'
   },
   
-  {
-    id: 'aws-cloud-acquisition',
-    title: 'Acquisition dans le Cloud',
-    issuer: 'Amazon Web Services',
-    date: '2024',
-    level: 'associate',
-    category: 'cloud',
-    badge: '/assets/certifs/AWS/AWS Course Completion Certificate Acquisition dans le cloud.pdf',
-    skills: ['Cloud Procurement', 'Vendor Management', 'Cost Analysis'],
-    businessValue: 'Stratégies d\'acquisition et négociation cloud',
-    clientBenefit: 'Optimisation des contrats cloud et réduction des coûts'
-  },
-  
   // Project Management
   {
     id: 'project-management-foundations',
     title: 'Fondements de la Gestion de Projet',
-    issuer: 'Google/Coursera',
-    date: '2024',
+    issuer: 'LinkedIn Learning',
+    issuerLogo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
+    date: 'Octobre 2024',
     level: 'foundation',
     category: 'management',
     badge: '/assets/certifs/fondement-gestion-projet.png',
@@ -70,18 +75,18 @@ export const certifications: Certification[] = [
     clientBenefit: 'Livraison dans les délais avec 95% de réussite projet'
   },
   
-  // Digital Marketing
   {
-    id: 'yali-digital-marketing',
-    title: 'Digital Marketing Recognition',
-    issuer: 'YALI (Young African Leaders Initiative)',
-    date: '2024',
+    id: 'google-workspace-deployment',
+    title: 'Google Education Deployment',
+    issuer: 'Google Workspace',
+    issuerLogo: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Workspace_Logo.svg',
+    date: 'Octobre 2023',
     level: 'associate',
-    category: 'marketing',
-    badge: '/assets/certifs/Yali/digital_markeint_recongnition.pdf',
-    skills: ['Digital Strategy', 'Growth Hacking', 'Analytics'],
-    businessValue: 'Stratégies digitales pour startups et PME africaines',
-    clientBenefit: 'Croissance digitale accélérée et acquisition clients'
+    category: 'cloud',
+    badge: '/assets/certifs/google-workspace.png',
+    skills: ['Google Workspace', 'Deployment', 'Training', 'Change Management'],
+    businessValue: 'Déploiement et formation Google Workspace pour organisations',
+    clientBenefit: 'Amélioration productivité de 60% via outils collaboratifs'
   }
 ]
 
@@ -102,9 +107,9 @@ export const certificationStats = {
 }
 
 export const clientSuccessMetrics = {
-  costReduction: '30-50%',
+  scalabilityImprovement: '+300%',
   projectSuccessRate: '95%',
-  infrastructureUptime: '99.9%',
-  migrationTime: '40% faster',
-  teamProductivity: '+60%'
+  teamsTrained: '200+',
+  clientsServed: '50+',
+  productivityGain: '+60%'
 }

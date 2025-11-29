@@ -23,61 +23,66 @@ import {
   Lock,
   Zap,
   Globe,
-  Settings
+  Settings,
+  X
 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { translations } from '@/lib/translations'
 import CertificationsShowcase from '@/components/CertificationsShowcase'
-import ClientSuccessSection from '@/components/ClientSuccessSection'
+import { useState } from 'react'
 
 export default function Home() {
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false)
   const pathname = usePathname()
   const locale = pathname.startsWith('/fr') ? 'fr' : 'en'
   const t = translations[locale as keyof typeof translations] || translations.en
   const skills = [
     { name: 'Google Cloud Platform', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg' },
     { name: 'AWS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
+    { name: 'OpenStack', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/OpenStack%C2%AE_Logo_2016.svg' },
     { name: 'Angular', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
     { name: 'NestJS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg' },
+    { name: 'ExpressJS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
     { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+    { name: 'MySQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
     { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
     { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
     { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
-    { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-    { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-    { name: 'Scrum/Agile', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
-    { name: 'UML', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/UML_logo.svg' }
+    { name: 'Jira Software', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' }
   ]
 
   const tools = [
-    { name: 'Jira Software', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
     { name: 'WordPress', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg' },
+    { name: 'Moodle', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Moodle-logo.svg' },
     { name: 'Odoo', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Odoo_logo.svg' },
-    { name: 'Magento', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg' },
     { name: 'Trello', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg' },
-    { name: 'Slack', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg' },
+    { name: 'Google Workspace', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Workspace_Logo.svg' },
     { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-    { name: 'GitHub', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' }
+    { name: 'GitHub', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+    { name: 'Jenkins', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg' }
   ]
 
   const projects = [
     {
-      name: 'PaieCashPlay',
-      description: 'Plateforme fintech de gestion des paiements',
-      tech: ['NestJS', 'Angular', 'MongoDB'],
-      image: '/assets/project1.jpg'
+      name: 'PaieCash-QR',
+      description: 'Solution de gestion de supermarché avec QR-code',
+      tech: ['ExpressJS', 'Sequelize', 'Angular 16', 'NgRx'],
+      image: '/assets/project1.jpg',
+      link: 'https://paiecash.com/'
     },
     {
-      name: 'SDK Games Africa',
-      description: 'SDK pour développeurs de jeux africains',
-      tech: ['TypeScript', 'Node.js', 'Docker'],
-      image: '/assets/project2.jpg'
+      name: 'PaieCashPlay Auth',
+      description: 'Solution WebSSO pour authentification centralisée',
+      tech: ['NextJS', 'Google Cloud Storage', 'WebSSO'],
+      image: '/assets/project2.jpg',
+      link: 'https://auth.paiecashplay.com'
     },
     {
-      name: 'AGRO-PME',
-      description: 'Solution digitale pour PME agricoles',
-      tech: ['Angular', 'Java EE', 'MySQL'],
-      image: '/assets/project3.jpg'
+      name: 'Architecture Cloud AWS',
+      description: 'Infrastructure AWS avec Load Balancing et Lambda pour SmartestLotto',
+      tech: ['AWS Lambda', 'Elastic Beanstalk', 'Load Balancer', 'AWS'],
+      image: '/assets/autres/architecture-aws-smartestlotto.png',
+      link: 'https://smartestlotto.io'
     }
   ]
 
@@ -301,21 +306,21 @@ export default function Home() {
                 
                 <div className="space-y-3">
                   <Button variant="outline" className="w-full justify-start hover:bg-blue-50 border-blue-200" asChild>
-                    <a href="https://linkedin.com" target="_blank">
+                    <a href="https://www.linkedin.com/in/cedric-nguendap-bedjama-143544175/" target="_blank">
                       <Linkedin className="mr-3 h-5 w-5 text-blue-600" />
                       {t.about.connectLinkedIn}
                     </a>
                   </Button>
                   
                   <Button variant="outline" className="w-full justify-start hover:bg-gray-50 border-gray-200" asChild>
-                    <a href="https://github.com" target="_blank">
+                    <a href="https://github.com/Cedric-Yaba-In" target="_blank">
                       <Github className="mr-3 h-5 w-5 text-gray-700" />
                       {t.about.viewGitHub}
                     </a>
                   </Button>
                   
                   <Button variant="outline" className="w-full justify-start hover:bg-green-50 border-green-200" asChild>
-                    <a href="mailto:cedric.nguendap@email.com">
+                    <a href="mailto:cednguendap@gmail.com">
                       <Mail className="mr-3 h-5 w-5 text-green-600" />
                       {t.about.sendEmail}
                     </a>
@@ -399,14 +404,14 @@ export default function Home() {
                 >
                   <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all bg-gradient-to-br from-purple-50 to-purple-100">
                     <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-md">
-                      <Layers className="w-10 h-10 text-purple-600" />
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/OpenStack%C2%AE_Logo_2016.svg" alt="OpenStack" className="w-12 h-8" />
                     </div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">Multi-Cloud Architecture</h4>
-                    <p className="text-gray-600 mb-4">Hybrid & Multi-Cloud Solutions</p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">OpenStack</h4>
+                    <p className="text-gray-600 mb-4">Private Cloud Infrastructure</p>
                     <div className="flex flex-wrap gap-2 justify-center">
-                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Terraform</span>
-                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Ansible</span>
-                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Docker</span>
+                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Nova</span>
+                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Neutron</span>
+                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Cinder</span>
                     </div>
                   </Card>
                 </motion.div>
@@ -418,12 +423,18 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t.expertise.developmentStack}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
                 {[
-                  { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', color: 'blue' },
-                  { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', color: 'cyan' },
-                  { name: 'Angular', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', color: 'red' },
-                  { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', color: 'green' },
-                  { name: 'NestJS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg', color: 'red' },
-                  { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', color: 'green' }
+                  { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+                  { name: 'Angular', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
+                  { name: 'NestJS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg' },
+                  { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+                  { name: 'ExpressJS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+                  { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+                  { name: 'MySQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+                  { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+                  { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
+                  { name: 'Jenkins', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg' },
+                  { name: 'Jira', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
+                  { name: 'WordPress', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg' }
                 ].map((tech, index) => (
                   <motion.div
                     key={tech.name}
@@ -448,10 +459,30 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t.expertise.architecturePatterns}</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { icon: Network, title: t.expertise.microservices, desc: t.expertise.microservicesDesc },
-                  { icon: Server, title: t.expertise.serverless, desc: t.expertise.serverlessDesc },
-                  { icon: Lock, title: t.expertise.securityFirst, desc: t.expertise.securityFirstDesc },
-                  { icon: Zap, title: t.expertise.performance, desc: t.expertise.performanceDesc }
+                  { 
+                    icon: Network, 
+                    title: t.expertise.microservices, 
+                    desc: t.expertise.microservicesDesc,
+                    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'
+                  },
+                  { 
+                    icon: Server, 
+                    title: t.expertise.serverless, 
+                    desc: t.expertise.serverlessDesc,
+                    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg'
+                  },
+                  { 
+                    icon: Lock, 
+                    title: t.expertise.securityFirst, 
+                    desc: t.expertise.securityFirstDesc,
+                    logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Oauth_logo.svg'
+                  },
+                  { 
+                    icon: Zap, 
+                    title: t.expertise.performance, 
+                    desc: t.expertise.performanceDesc,
+                    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg'
+                  }
                 ].map((pattern, index) => (
                   <motion.div
                     key={pattern.title}
@@ -462,7 +493,9 @@ export default function Home() {
                     whileHover={{ y: -5 }}
                   >
                     <Card className="text-center p-6 border-0 shadow-md hover:shadow-lg transition-all">
-                      <pattern.icon className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+                      <div className="w-12 h-12 mx-auto mb-4 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <img src={pattern.logo} alt={pattern.title} className="w-8 h-8" />
+                      </div>
                       <h4 className="text-lg font-semibold text-gray-900 mb-2">{pattern.title}</h4>
                       <p className="text-gray-600 text-sm">{pattern.desc}</p>
                     </Card>
@@ -484,38 +517,41 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Cloud Solutions & Projects</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.solutions.title}</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mb-6"></div>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Enterprise-grade cloud architectures and modern applications built for scale, security, and performance
+                {t.solutions.subtitle}
               </p>
             </div>
             
             <div className="grid lg:grid-cols-3 gap-8 mb-16">
               {[
                 {
-                  title: 'PaieCashPlay FinTech Platform',
-                  description: 'Scalable payment processing platform built on Google Cloud with microservices architecture, handling thousands of transactions per second.',
+                  title: locale === 'fr' ? 'PaieCash-QR Supermarché' : 'PaieCash-QR Supermarket',
+                  description: locale === 'fr' ? 'Solution complète de gestion de supermarché avec système QR-code pour produits, backend API REST et dashboard administrateur.' : 'Complete supermarket management solution with QR-code system for products, REST API backend and admin dashboard.',
                   icon: Globe,
-                  tech: ['Google Cloud Run', 'NestJS', 'Angular', 'Cloud SQL'],
-                  metrics: ['99.9% Uptime', '10K+ TPS', 'Multi-region'],
-                  color: 'blue'
+                  tech: ['ExpressJS', 'Sequelize', 'Angular 16', 'NgRx'],
+                  metrics: locale === 'fr' ? ['API REST', 'QR-Code', 'Dashboard Admin'] : ['REST API', 'QR-Code', 'Admin Dashboard'],
+                  color: 'blue',
+                  link: 'https://paiecash.com/'
                 },
                 {
-                  title: 'SDK Games Africa',
-                  description: 'Cloud-native SDK platform for African game developers with auto-scaling infrastructure and global CDN distribution.',
+                  title: 'PaieCashPlay Auth WebSSO',
+                  description: locale === 'fr' ? 'Solution d\'authentification centralisée WebSSO pour l\'écosystème PaieCashPlay, développée avec NextJS et Google Cloud Storage.' : 'Centralized WebSSO authentication solution for the PaieCashPlay ecosystem, developed with NextJS and Google Cloud Storage.',
                   icon: Code,
-                  tech: ['Kubernetes', 'TypeScript', 'Cloud Storage', 'Firebase'],
-                  metrics: ['50+ Games', 'Global CDN', 'Real-time Analytics'],
-                  color: 'green'
+                  tech: ['NextJS', 'Google Cloud Storage', 'WebSSO', 'Authentication'],
+                  metrics: locale === 'fr' ? ['SSO Centralisé', 'Sécurisé', 'Multi-plateforme'] : ['Centralized SSO', 'Secure', 'Multi-platform'],
+                  color: 'green',
+                  link: 'https://auth.paiecashplay.com'
                 },
                 {
-                  title: 'AGRO-PME Digital Platform',
-                  description: 'Digital transformation solution for agricultural SMEs with IoT integration and predictive analytics on Google Cloud.',
+                  title: locale === 'fr' ? 'Architecture AWS SmartestLotto' : 'AWS SmartestLotto Architecture',
+                  description: locale === 'fr' ? 'Infrastructure AWS complète avec Load Balancing, Lambda Functions et Elastic Beanstalk pour la plateforme de loterie SmartestLotto.' : 'Complete AWS infrastructure with Load Balancing, Lambda Functions and Elastic Beanstalk for the SmartestLotto lottery platform.',
                   icon: Database,
-                  tech: ['BigQuery', 'IoT Core', 'Angular', 'Cloud Functions'],
-                  metrics: ['500+ Farmers', 'IoT Sensors', 'ML Predictions'],
-                  color: 'yellow'
+                  tech: ['AWS Lambda', 'Elastic Beanstalk', 'Load Balancer', 'CloudWatch'],
+                  metrics: locale === 'fr' ? ['Auto-scaling', 'Haute disponibilité', 'Performance'] : ['Auto-scaling', 'High availability', 'Performance'],
+                  color: 'yellow',
+                  link: 'https://smartestlotto.io'
                 }
               ].map((solution, index) => (
                 <motion.div
@@ -559,7 +595,7 @@ export default function Home() {
                       
                       <div className="space-y-4">
                         <div>
-                          <h4 className="text-sm font-semibold text-gray-900 mb-2">Technology Stack</h4>
+                          <h4 className="text-sm font-semibold text-gray-900 mb-2">{locale === 'fr' ? 'Stack Technologique' : 'Technology Stack'}</h4>
                           <div className="flex flex-wrap gap-2">
                             {solution.tech.map((tech) => (
                               <span key={tech} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium">
@@ -570,7 +606,7 @@ export default function Home() {
                         </div>
                         
                         <div>
-                          <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Metrics</h4>
+                          <h4 className="text-sm font-semibold text-gray-900 mb-2">{locale === 'fr' ? 'Métriques Clés' : 'Key Metrics'}</h4>
                           <div className="flex flex-wrap gap-2">
                             {solution.metrics.map((metric) => (
                               <span key={metric} className={`px-3 py-1 text-xs rounded-full font-medium ${
@@ -583,6 +619,37 @@ export default function Home() {
                             ))}
                           </div>
                         </div>
+                        
+                        {/* Image spéciale pour l'architecture AWS */}
+                        {solution.title === 'Architecture AWS SmartestLotto' && (
+                          <div className="mb-4">
+                            <h4 className="text-sm font-semibold text-gray-900 mb-2">{locale === 'fr' ? 'Diagramme d\'Architecture' : 'Architecture Diagram'}</h4>
+                            <div 
+                              className="relative group cursor-pointer"
+                              onClick={() => setIsImageModalOpen(true)}
+                            >
+                              <img 
+                                src="/assets/autres/architecture-aws-smartestlotto.png" 
+                                alt="Architecture AWS SmartestLotto"
+                                className="w-full h-48 object-contain bg-gray-50 rounded-lg border border-gray-200 hover:border-yellow-300 transition-all"
+                              />
+                              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 rounded-lg transition-all flex items-center justify-center">
+                                <span className="text-white opacity-0 group-hover:opacity-100 text-sm font-medium">{locale === 'fr' ? 'Cliquer pour agrandir' : 'Click to enlarge'}</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {solution.link && (
+                          <div className="pt-2">
+                            <Button variant="outline" size="sm" className="w-full" asChild>
+                              <a href={solution.link} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="w-4 h-4 mr-2" />
+                                {locale === 'fr' ? 'Voir le projet' : 'View Project'}
+                              </a>
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
@@ -599,16 +666,32 @@ export default function Home() {
               className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8"
             >
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Cloud Architecture Expertise</h3>
-                <p className="text-gray-600">Designing resilient, scalable, and cost-effective cloud solutions</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t.solutions.architectureTitle}</h3>
+                <p className="text-gray-600">{t.solutions.architectureSubtitle}</p>
               </div>
               
               <div className="grid md:grid-cols-4 gap-6">
                 {[
-                  { icon: Cloud, title: 'Multi-Cloud', desc: 'Hybrid architectures across GCP, AWS, and Azure' },
-                  { icon: Shield, title: 'Security-First', desc: 'Zero-trust security and compliance frameworks' },
-                  { icon: Zap, title: 'Auto-Scaling', desc: 'Elastic infrastructure that scales with demand' },
-                  { icon: Settings, title: 'DevOps/MLOps', desc: 'CI/CD pipelines and ML model deployment' }
+                  { 
+                    title: 'Google Cloud', 
+                    desc: 'Professional Cloud Architect certified',
+                    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg'
+                  },
+                  { 
+                    title: 'DevOps/CI-CD', 
+                    desc: 'Jenkins, GitHub Actions, Docker',
+                    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg'
+                  },
+                  { 
+                    title: 'Kubernetes', 
+                    desc: 'Container orchestration et scaling',
+                    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg'
+                  },
+                  { 
+                    title: 'Gestion Projet', 
+                    desc: 'Agile, Scrum, Jira Software',
+                    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg'
+                  }
                 ].map((feature, index) => (
                   <motion.div
                     key={feature.title}
@@ -619,7 +702,7 @@ export default function Home() {
                     className="text-center"
                   >
                     <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-md">
-                      <feature.icon className="w-8 h-8 text-blue-600" />
+                      <img src={feature.logo} alt={feature.title} className="w-8 h-8" />
                     </div>
                     <h4 className="font-semibold text-gray-900 mb-2">{feature.title}</h4>
                     <p className="text-sm text-gray-600">{feature.desc}</p>
@@ -633,9 +716,6 @@ export default function Home() {
 
       {/* Certifications Section - Nouvelle version */}
       <CertificationsShowcase />
-      
-      {/* Client Success Section */}
-      <ClientSuccessSection />
 
       {/* Formation Section */}
       <section className="py-20 px-6 bg-gradient-to-br from-white via-green-50 to-blue-50 relative">
@@ -655,7 +735,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              Formation & Mentorat
+              {t.education.title}
             </motion.h2>
             
             <div className="grid md:grid-cols-3 gap-12 mb-16">
@@ -669,12 +749,12 @@ export default function Home() {
                   <CardHeader>
                     <CardTitle className="flex items-center text-xl">
                       <GraduationCap className="mr-3 h-8 w-8 text-blue-600" />
-                      Université des Montagnes
+                      Yaba-In
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-700 mb-3 text-lg font-medium">Enseignant assistant</p>
-                    <p className="text-gray-600">Génie logiciel, UML, architectures cloud hybrides</p>
+                    <p className="text-gray-700 mb-3 text-lg font-medium">CTO & Gestionnaire de projet</p>
+                    <p className="text-gray-600">Architectures cloud GCP, formation 200+ développeurs</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -689,12 +769,12 @@ export default function Home() {
                   <CardHeader>
                     <CardTitle className="flex items-center text-xl">
                       <Users className="mr-3 h-8 w-8 text-green-600" />
-                      ISTIC Bangangté
+                      GIC Promote LTD
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-700 mb-3 text-lg font-medium">Enseignant assistant</p>
-                    <p className="text-gray-600">Java, Android, bases de données distribuées</p>
+                    <p className="text-gray-700 mb-3 text-lg font-medium">Consultant transformation digitale</p>
+                    <p className="text-gray-600">Google Workspace, optimisation workflows cloud</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -709,12 +789,12 @@ export default function Home() {
                   <CardHeader>
                     <CardTitle className="flex items-center text-xl">
                       <Rocket className="mr-3 h-8 w-8 text-purple-600" />
-                      Mentorat Yaba-In
+                      Formation & Enseignement
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-700 mb-3 text-lg font-medium">Formateur & Mentor</p>
-                    <p className="text-gray-600">Technologies web & cloud, gestion de projet agile</p>
+                    <p className="text-gray-700 mb-3 text-lg font-medium">Université des Montagnes & ISTIC</p>
+                    <p className="text-gray-600">Génie logiciel, UML, Java, Android, bases de données</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -727,15 +807,16 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 1, duration: 0.8 }}
-                className="relative"
+                className="relative overflow-hidden"
               >
                 <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-r from-green-200 to-blue-200 rounded-2xl transform rotate-2"></div>
                 <img 
                   src="/assets/photo-formation/formation-1.jpg" 
                   alt="Séance de formation"
-                  className="relative w-full h-80 object-cover rounded-2xl shadow-xl"
+                  className="relative w-full h-96 object-cover rounded-2xl shadow-xl"
                   style={{
-                    filter: 'blur(0px) contrast(1.1) saturate(1.1) drop-shadow(0 10px 20px rgba(0,0,0,0.2))'
+                    filter: 'blur(0px) contrast(1.1) saturate(1.1) drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
+                    transform: 'rotate(270deg)'
                   }}
                 />
                 <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3">
@@ -755,9 +836,10 @@ export default function Home() {
                 <img 
                   src="/assets/photo-formation/formation-avec-etudiant.jpg" 
                   alt="Avec mes étudiants"
-                  className="relative w-full h-80 object-cover rounded-2xl shadow-xl"
+                  className="relative w-full h-96 object-cover rounded-2xl shadow-xl"
                   style={{
-                    filter: 'blur(0px) contrast(1.1) saturate(1.1) drop-shadow(0 10px 20px rgba(0,0,0,0.2))'
+                    filter: 'blur(0px) contrast(1.1) saturate(1.1) drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
+                    objectPosition: 'center top'
                   }}
                 />
                 <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-3">
@@ -786,7 +868,7 @@ export default function Home() {
             className="text-center"
           >
             <h2 className="text-4xl font-bold mb-16 text-white">
-              Vision for Africa's Digital Future
+              {t.vision.title}
             </h2>
             
             <div className="grid md:grid-cols-3 gap-8 mb-16">
@@ -801,8 +883,8 @@ export default function Home() {
                 <div className="w-16 h-16 mx-auto mb-6 bg-blue-500 rounded-xl flex items-center justify-center">
                   <Server className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4">Cloud Infrastructure</h3>
-                <p className="text-blue-100 leading-relaxed">Building sovereign cloud infrastructure for Cameroon's digital independence</p>
+                <h3 className="text-xl font-bold mb-4">{t.vision.cloudInfrastructure}</h3>
+                <p className="text-blue-100 leading-relaxed">{t.vision.cloudInfrastructureDesc}</p>
               </motion.div>
               
               <motion.div 
@@ -816,8 +898,8 @@ export default function Home() {
                 <div className="w-16 h-16 mx-auto mb-6 bg-green-500 rounded-xl flex items-center justify-center">
                   <GraduationCap className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4">Tech Education</h3>
-                <p className="text-green-100 leading-relaxed">Training the next generation of African cloud architects and developers</p>
+                <h3 className="text-xl font-bold mb-4">{t.vision.techEducation}</h3>
+                <p className="text-green-100 leading-relaxed">{t.vision.techEducationDesc}</p>
               </motion.div>
               
               <motion.div 
@@ -831,8 +913,8 @@ export default function Home() {
                 <div className="w-16 h-16 mx-auto mb-6 bg-purple-500 rounded-xl flex items-center justify-center">
                   <Rocket className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4">Innovation Hub</h3>
-                <p className="text-purple-100 leading-relaxed">Creating technology ecosystems that drive continental innovation</p>
+                <h3 className="text-xl font-bold mb-4">{t.vision.innovationHub}</h3>
+                <p className="text-purple-100 leading-relaxed">{t.vision.innovationHubDesc}</p>
               </motion.div>
             </div>
             
@@ -843,8 +925,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.8 }}
             >
-              Empowering Africa's digital transformation through cloud-first architectures, 
-              sustainable technology solutions, and world-class technical education.
+              {t.vision.description}
             </motion.p>
           </motion.div>
         </div>
@@ -882,7 +963,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">{t.contact.email}</p>
-                      <p className="text-gray-600">cedric.nguendap@email.com</p>
+                      <p className="text-gray-600">cednguendap@gmail.com</p>
                     </div>
                   </div>
                   
@@ -892,7 +973,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">{t.contact.phone}</p>
-                      <p className="text-gray-600">+237 6XX XXX XXX</p>
+                      <p className="text-gray-600">+237 698 29 53 68</p>
                     </div>
                   </div>
                   
@@ -924,24 +1005,28 @@ export default function Home() {
                     </p>
                     
                     <div className="space-y-3">
-                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                        {t.contact.scheduleReview}
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" asChild>
+                        <a href="https://calendly.com/cednguendap/new-meeting" target="_blank">
+                          {t.contact.scheduleReview}
+                        </a>
                       </Button>
-                      <Button variant="outline" className="w-full border-gray-300 text-gray-700 hover:bg-gray-50">
-                        {t.contact.downloadPortfolio}
+                      <Button variant="outline" className="w-full border-gray-300 text-gray-700 hover:bg-gray-50" asChild>
+                        <a href={locale === 'fr' ? '/assets/cv/new CV Cloud-PRoject Cedric Nguendap FR.pdf' : '/assets/cv/new CV Cloud-PRoject Cedric Nguendap EN.pdf'} download>
+                          {t.contact.downloadPortfolio}
+                        </a>
                       </Button>
                     </div>
                     
                     <div className="pt-4 border-t border-gray-200">
                       <p className="text-sm text-gray-500 text-center mb-4">{t.contact.connectSocial}</p>
                       <div className="flex justify-center space-x-4">
-                        <a href="#" className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center hover:bg-blue-200 transition-colors">
+                        <a href="https://www.linkedin.com/in/cedric-nguendap-bedjama-143544175/" target="_blank" className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center hover:bg-blue-200 transition-colors">
                           <Linkedin className="h-5 w-5 text-blue-600" />
                         </a>
-                        <a href="#" className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors">
+                        <a href="https://github.com/Cedric-Yaba-In" target="_blank" className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors">
                           <Github className="h-5 w-5 text-gray-700" />
                         </a>
-                        <a href="#" className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center hover:bg-green-200 transition-colors">
+                        <a href="mailto:cednguendap@gmail.com" className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center hover:bg-green-200 transition-colors">
                           <Mail className="h-5 w-5 text-green-600" />
                         </a>
                       </div>
@@ -969,13 +1054,13 @@ export default function Home() {
                 {t.footer.description}
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                <a href="https://www.linkedin.com/in/cedric-nguendap-bedjama-143544175/" target="_blank" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
                   <Linkedin className="h-5 w-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
+                <a href="https://github.com/Cedric-Yaba-In" target="_blank" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
                   <Github className="h-5 w-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="mailto:cednguendap@gmail.com" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors">
                   <Mail className="h-5 w-5" />
                 </a>
               </div>
@@ -1009,6 +1094,29 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Modal pour l'image agrandie */}
+      {isImageModalOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsImageModalOpen(false)}
+        >
+          <div className="relative max-w-6xl max-h-full">
+            <button 
+              onClick={() => setIsImageModalOpen(false)}
+              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <img 
+              src="/assets/autres/architecture-aws-smartestlotto.png" 
+              alt="Architecture AWS SmartestLotto - Vue agrandie"
+              className="max-w-full max-h-full object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
