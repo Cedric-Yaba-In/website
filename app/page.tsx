@@ -7,8 +7,8 @@ import {
   Cloud, 
   Code, 
   Database, 
-  Smartphone, 
-  Award, 
+  Server, 
+  Shield, 
   Users, 
   Rocket, 
   Mail, 
@@ -18,11 +18,22 @@ import {
   ExternalLink,
   GraduationCap,
   Target,
-  Satellite,
-  Building
+  Layers,
+  Network,
+  Lock,
+  Zap,
+  Globe,
+  Settings
 } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { translations } from '@/lib/translations'
+import CertificationsShowcase from '@/components/CertificationsShowcase'
+import ClientSuccessSection from '@/components/ClientSuccessSection'
 
 export default function Home() {
+  const pathname = usePathname()
+  const locale = pathname.startsWith('/fr') ? 'fr' : 'en'
+  const t = translations[locale as keyof typeof translations] || translations.en
   const skills = [
     { name: 'Google Cloud Platform', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg' },
     { name: 'AWS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
@@ -73,60 +84,62 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-lg z-50 border-b border-purple-100 shadow-lg">
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-lg z-50 border-b border-blue-100 shadow-sm">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <motion.h1 
+            <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-2xl font-bold gradient-text"
+              className="flex items-center space-x-3"
             >
-              Cédric Nguendap
-            </motion.h1>
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
+                <Cloud className="h-5 w-5 text-white" />
+              </div>
+              <h1 className="text-xl font-semibold text-gray-800">{t.hero.title}</h1>
+              <span className="text-sm text-blue-600 font-medium">Cloud Architect</span>
+            </motion.div>
             <div className="hidden md:flex space-x-8">
+              <div className="flex items-center space-x-4 mr-6">
+                <a href="/en" className={`text-sm font-medium ${locale === 'en' ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>EN</a>
+                <span className="text-gray-300">|</span>
+                <a href="/fr" className={`text-sm font-medium ${locale === 'fr' ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>FR</a>
+              </div>
               <motion.a 
-                href="#profil" 
-                className="text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium hover:scale-105"
-                whileHover={{ y: -2 }}
+                href="#about" 
+                className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                whileHover={{ y: -1 }}
               >
-                Profil
+                {t.nav.about}
               </motion.a>
               <motion.a 
-                href="#competences" 
-                className="text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium hover:scale-105"
-                whileHover={{ y: -2 }}
+                href="#expertise" 
+                className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                whileHover={{ y: -1 }}
               >
-                Compétences
+                {t.nav.expertise}
               </motion.a>
               <motion.a 
-                href="#projets" 
-                className="text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium hover:scale-105"
-                whileHover={{ y: -2 }}
+                href="#solutions" 
+                className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                whileHover={{ y: -1 }}
               >
-                Projets
+                {t.nav.solutions}
               </motion.a>
               <motion.a 
                 href="#certifications" 
-                className="text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium hover:scale-105"
-                whileHover={{ y: -2 }}
+                className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                whileHover={{ y: -1 }}
               >
-                Certifications
-              </motion.a>
-              <motion.a 
-                href="#vision" 
-                className="text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium hover:scale-105"
-                whileHover={{ y: -2 }}
-              >
-                Vision
+                {t.nav.certifications}
               </motion.a>
               <motion.a 
                 href="#contact" 
-                className="text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium hover:scale-105"
-                whileHover={{ y: -2 }}
+                className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                whileHover={{ y: -1 }}
               >
-                Contact
+                {t.nav.contact}
               </motion.a>
             </div>
           </div>
@@ -134,479 +147,495 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-20 px-6 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 hero-bg opacity-10"></div>
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 floating"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 floating" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 floating" style={{animationDelay: '4s'}}></div>
-        
-        <div className="container mx-auto text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="max-w-5xl mx-auto"
-          >
-            <motion.div 
-              className="mb-12"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.8, type: "spring", bounce: 0.4 }}
+      <section className="relative pt-24 pb-16 px-6 bg-gradient-to-br from-blue-50 via-white to-green-50">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="relative w-40 h-40 mx-auto mb-8">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 pulse-glow shadow-2xl"></div>
-                <img 
-                  src="/assets/photo-cedric/cedric-2.jpg" 
-                  alt="Cédric Nguendap"
-                  className="relative w-full h-full rounded-full object-cover border-4 border-white shadow-xl backdrop-blur-sm"
-                  style={{
-                    filter: 'blur(0px) contrast(1.1) saturate(1.2)',
-                    background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%)'
-                  }}
-                />
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-sm text-gray-500 ml-2">{t.hero.certified}</span>
+              </div>
+              
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                {t.hero.title}
+              </h1>
+              
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                  Cloud Architect
+                </div>
+                <div className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                  Full-Stack Developer
+                </div>
+              </div>
+              
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                {t.hero.description}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3" asChild>
+                  <a href="#solutions">{t.hero.viewSolutions}</a>
+                </Button>
+                <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3" asChild>
+                  <a href="#contact">{t.hero.getInTouch}</a>
+                </Button>
               </div>
             </motion.div>
             
-            <motion.h1 
-              className="text-6xl md:text-7xl font-bold text-gray-800 mb-6 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
             >
-              Nguendap Bedjama <span className="gradient-text">Cédric</span>
-            </motion.h1>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl transform rotate-3 opacity-20"></div>
+                <img 
+                  src="/assets/photo-cedric/cedric-2.jpg" 
+                  alt="Cédric Nguendap - Cloud Architect"
+                  className="relative w-full h-96 object-cover rounded-2xl shadow-xl"
+                />
+                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3">
+                  <div className="flex items-center space-x-2">
+                    <Cloud className="h-5 w-5 text-blue-600" />
+                    <span className="text-sm font-medium text-gray-800">Google Cloud Professional</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-6 bg-white">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.about.title}</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto"></div>
+            </div>
             
-            <motion.h2 
-              className="text-3xl md:text-4xl text-gray-600 mb-8 font-light"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-            >
-              Architecte Cloud & Développeur Full-Stack
-            </motion.h2>
-            
-            <motion.p 
-              className="text-2xl text-gray-700 mb-12 max-w-3xl mx-auto font-medium"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.8 }}
-            >
-              « Construire le futur technologique du Cameroun et de l'Afrique »
-            </motion.p>
-            
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-6 justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.8 }}
-            >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-xl" asChild>
-                  <a href="#projets">Découvrir mes projets</a>
-                </Button>
+            <div className="grid lg:grid-cols-3 gap-12">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="lg:col-span-2"
+              >
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    {t.about.description1}
+                  </p>
+                  <p className="text-gray-600 leading-relaxed mb-8">
+                    {t.about.description2}
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex items-center space-x-3 p-4 bg-blue-50 rounded-lg">
+                    <Cloud className="h-8 w-8 text-blue-600" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{t.about.cloudArchitecture}</h4>
+                      <p className="text-sm text-gray-600">{t.about.cloudArchitectureDesc}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3 p-4 bg-green-50 rounded-lg">
+                    <Code className="h-8 w-8 text-green-600" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{t.about.fullStackDev}</h4>
+                      <p className="text-sm text-gray-600">{t.about.fullStackDevDesc}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3 p-4 bg-yellow-50 rounded-lg">
+                    <Shield className="h-8 w-8 text-yellow-600" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{t.about.security}</h4>
+                      <p className="text-sm text-gray-600">{t.about.securityDesc}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3 p-4 bg-red-50 rounded-lg">
+                    <Users className="h-8 w-8 text-red-600" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{t.about.teamLeadership}</h4>
+                      <p className="text-sm text-gray-600">{t.about.teamLeadershipDesc}</p>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" size="lg" className="border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-8 py-4 text-lg font-semibold shadow-xl" asChild>
-                  <a href="#contact">Me contacter</a>
-                </Button>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="space-y-6"
+              >
+                <div className="relative">
+                  <img 
+                    src="/assets/photo-cedric/cedric-3.jpg" 
+                    alt="Cédric Nguendap - Professional Photo"
+                    className="w-full h-80 object-cover rounded-xl shadow-lg"
+                  />
+                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-sm font-medium text-gray-800">{t.about.available}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  <Button variant="outline" className="w-full justify-start hover:bg-blue-50 border-blue-200" asChild>
+                    <a href="https://linkedin.com" target="_blank">
+                      <Linkedin className="mr-3 h-5 w-5 text-blue-600" />
+                      {t.about.connectLinkedIn}
+                    </a>
+                  </Button>
+                  
+                  <Button variant="outline" className="w-full justify-start hover:bg-gray-50 border-gray-200" asChild>
+                    <a href="https://github.com" target="_blank">
+                      <Github className="mr-3 h-5 w-5 text-gray-700" />
+                      {t.about.viewGitHub}
+                    </a>
+                  </Button>
+                  
+                  <Button variant="outline" className="w-full justify-start hover:bg-green-50 border-green-200" asChild>
+                    <a href="mailto:cedric.nguendap@email.com">
+                      <Mail className="mr-3 h-5 w-5 text-green-600" />
+                      {t.about.sendEmail}
+                    </a>
+                  </Button>
+                </div>
               </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Expertise Section */}
+      <section id="expertise" className="py-20 px-6 bg-gray-50">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.expertise.title}</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mb-6"></div>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                {t.expertise.subtitle}
+              </p>
+            </div>
+            
+            {/* Cloud Platforms */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t.expertise.cloudPlatforms}</h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all bg-gradient-to-br from-blue-50 to-blue-100">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-md">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" className="w-10 h-10" />
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">Google Cloud Platform</h4>
+                    <p className="text-gray-600 mb-4">Professional Cloud Architect</p>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <span className="px-3 py-1 bg-blue-200 text-blue-800 text-xs rounded-full">Compute Engine</span>
+                      <span className="px-3 py-1 bg-blue-200 text-blue-800 text-xs rounded-full">Kubernetes</span>
+                      <span className="px-3 py-1 bg-blue-200 text-blue-800 text-xs rounded-full">Cloud Run</span>
+                    </div>
+                  </Card>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all bg-gradient-to-br from-orange-50 to-orange-100">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-md">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" className="w-12 h-8" />
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">Amazon Web Services</h4>
+                    <p className="text-gray-600 mb-4">Cloud Practitioner Certified</p>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <span className="px-3 py-1 bg-orange-200 text-orange-800 text-xs rounded-full">EC2</span>
+                      <span className="px-3 py-1 bg-orange-200 text-orange-800 text-xs rounded-full">Lambda</span>
+                      <span className="px-3 py-1 bg-orange-200 text-orange-800 text-xs rounded-full">S3</span>
+                    </div>
+                  </Card>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <Card className="text-center p-8 border-0 shadow-lg hover:shadow-xl transition-all bg-gradient-to-br from-purple-50 to-purple-100">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-md">
+                      <Layers className="w-10 h-10 text-purple-600" />
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">Multi-Cloud Architecture</h4>
+                    <p className="text-gray-600 mb-4">Hybrid & Multi-Cloud Solutions</p>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Terraform</span>
+                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Ansible</span>
+                      <span className="px-3 py-1 bg-purple-200 text-purple-800 text-xs rounded-full">Docker</span>
+                    </div>
+                  </Card>
+                </motion.div>
+              </div>
+            </div>
+            
+            {/* Development Stack */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t.expertise.developmentStack}</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                {[
+                  { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', color: 'blue' },
+                  { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', color: 'cyan' },
+                  { name: 'Angular', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', color: 'red' },
+                  { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', color: 'green' },
+                  { name: 'NestJS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg', color: 'red' },
+                  { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', color: 'green' }
+                ].map((tech, index) => (
+                  <motion.div
+                    key={tech.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    className="text-center"
+                  >
+                    <div className="w-16 h-16 mx-auto mb-3 bg-white rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                      <img src={tech.logo} alt={tech.name} className="w-10 h-10" />
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">{tech.name}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Architecture Patterns */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t.expertise.architecturePatterns}</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { icon: Network, title: t.expertise.microservices, desc: t.expertise.microservicesDesc },
+                  { icon: Server, title: t.expertise.serverless, desc: t.expertise.serverlessDesc },
+                  { icon: Lock, title: t.expertise.securityFirst, desc: t.expertise.securityFirstDesc },
+                  { icon: Zap, title: t.expertise.performance, desc: t.expertise.performanceDesc }
+                ].map((pattern, index) => (
+                  <motion.div
+                    key={pattern.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <Card className="text-center p-6 border-0 shadow-md hover:shadow-lg transition-all">
+                      <pattern.icon className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2">{pattern.title}</h4>
+                      <p className="text-gray-600 text-sm">{pattern.desc}</p>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Solutions Section */}
+      <section id="solutions" className="py-20 px-6 bg-white">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Cloud Solutions & Projects</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mb-6"></div>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Enterprise-grade cloud architectures and modern applications built for scale, security, and performance
+              </p>
+            </div>
+            
+            <div className="grid lg:grid-cols-3 gap-8 mb-16">
+              {[
+                {
+                  title: 'PaieCashPlay FinTech Platform',
+                  description: 'Scalable payment processing platform built on Google Cloud with microservices architecture, handling thousands of transactions per second.',
+                  icon: Globe,
+                  tech: ['Google Cloud Run', 'NestJS', 'Angular', 'Cloud SQL'],
+                  metrics: ['99.9% Uptime', '10K+ TPS', 'Multi-region'],
+                  color: 'blue'
+                },
+                {
+                  title: 'SDK Games Africa',
+                  description: 'Cloud-native SDK platform for African game developers with auto-scaling infrastructure and global CDN distribution.',
+                  icon: Code,
+                  tech: ['Kubernetes', 'TypeScript', 'Cloud Storage', 'Firebase'],
+                  metrics: ['50+ Games', 'Global CDN', 'Real-time Analytics'],
+                  color: 'green'
+                },
+                {
+                  title: 'AGRO-PME Digital Platform',
+                  description: 'Digital transformation solution for agricultural SMEs with IoT integration and predictive analytics on Google Cloud.',
+                  icon: Database,
+                  tech: ['BigQuery', 'IoT Core', 'Angular', 'Cloud Functions'],
+                  metrics: ['500+ Farmers', 'IoT Sensors', 'ML Predictions'],
+                  color: 'yellow'
+                }
+              ].map((solution, index) => (
+                <motion.div
+                  key={solution.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="group"
+                >
+                  <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div className={`h-2 bg-gradient-to-r ${
+                      solution.color === 'blue' ? 'from-blue-500 to-blue-600' :
+                      solution.color === 'green' ? 'from-green-500 to-green-600' :
+                      'from-yellow-500 to-yellow-600'
+                    }`}></div>
+                    
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                          solution.color === 'blue' ? 'bg-blue-100' :
+                          solution.color === 'green' ? 'bg-green-100' :
+                          'bg-yellow-100'
+                        }`}>
+                          <solution.icon className={`w-6 h-6 ${
+                            solution.color === 'blue' ? 'text-blue-600' :
+                            solution.color === 'green' ? 'text-green-600' :
+                            'text-yellow-600'
+                          }`} />
+                        </div>
+                        <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                      </div>
+                      <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {solution.title}
+                      </CardTitle>
+                    </CardHeader>
+                    
+                    <CardContent className="space-y-6">
+                      <p className="text-gray-600 leading-relaxed">{solution.description}</p>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="text-sm font-semibold text-gray-900 mb-2">Technology Stack</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {solution.tech.map((tech) => (
+                              <span key={tech} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Metrics</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {solution.metrics.map((metric) => (
+                              <span key={metric} className={`px-3 py-1 text-xs rounded-full font-medium ${
+                                solution.color === 'blue' ? 'bg-blue-100 text-blue-800' :
+                                solution.color === 'green' ? 'bg-green-100 text-green-800' :
+                                'bg-yellow-100 text-yellow-800'
+                              }`}>
+                                {metric}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* Architecture Showcase */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8"
+            >
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Cloud Architecture Expertise</h3>
+                <p className="text-gray-600">Designing resilient, scalable, and cost-effective cloud solutions</p>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-6">
+                {[
+                  { icon: Cloud, title: 'Multi-Cloud', desc: 'Hybrid architectures across GCP, AWS, and Azure' },
+                  { icon: Shield, title: 'Security-First', desc: 'Zero-trust security and compliance frameworks' },
+                  { icon: Zap, title: 'Auto-Scaling', desc: 'Elastic infrastructure that scales with demand' },
+                  { icon: Settings, title: 'DevOps/MLOps', desc: 'CI/CD pipelines and ML model deployment' }
+                ].map((feature, index) => (
+                  <motion.div
+                    key={feature.title}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 + (index * 0.1) }}
+                    className="text-center"
+                  >
+                    <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-xl flex items-center justify-center shadow-md">
+                      <feature.icon className="w-8 h-8 text-blue-600" />
+                    </div>
+                    <h4 className="font-semibold text-gray-900 mb-2">{feature.title}</h4>
+                    <p className="text-sm text-gray-600">{feature.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Profil Section */}
-      <section id="profil" className="py-20 px-6 bg-gradient-to-r from-white via-purple-50 to-blue-50 relative">
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500"></div>
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-6xl mx-auto"
-          >
-            <motion.h2 
-              className="text-5xl font-bold text-center mb-16 gradient-text"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              Mon Profil
-            </motion.h2>
-            
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                <div className="relative">
-                  <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-r from-purple-200 to-blue-200 rounded-2xl transform rotate-3"></div>
-                  <div className="relative bg-white p-8 rounded-2xl shadow-xl">
-                    <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                      Architecte Cloud & Développeur Full-Stack, passionné par l'innovation et la digitalisation. 
-                      Avec plus de 4 ans d'expérience en conception d'architectures cloud, développement logiciel 
-                      et gestion de projets, j'apporte des solutions modernes, scalables et adaptées aux besoins des entreprises.
-                    </p>
-                    <p className="text-lg text-gray-700 leading-relaxed">
-                      Mon objectif est d'accompagner mes clients vers une transformation numérique réussie 
-                      tout en préparant l'avenir technologique du Cameroun.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="relative">
-                  <motion.img 
-                    src="/assets/photo-cedric/cedric-3.jpg" 
-                    alt="Cédric Nguendap - Photo professionnelle"
-                    className="w-full h-80 object-cover rounded-2xl shadow-xl"
-                    style={{
-                      filter: 'blur(0px) contrast(1.1) saturate(1.1) drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
-                      background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))'
-                    }}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-purple-900/20 via-transparent to-transparent"></div>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="space-y-6"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-              >
-                <div className="mb-8">
-                  <motion.img 
-                    src="/assets/photo-cedric/photo-cedric-1.jpeg" 
-                    alt="Cédric Nguendap - Portrait"
-                    className="w-full h-64 object-cover rounded-2xl shadow-xl mb-6"
-                    style={{
-                      filter: 'blur(0px) contrast(1.1) saturate(1.1) drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
-                      background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))'
-                    }}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
-                <motion.div whileHover={{ scale: 1.05, x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
-                  <Button variant="outline" className="w-full justify-start bg-gradient-to-r from-blue-50 to-blue-100 border-blue-300 hover:from-blue-500 hover:to-blue-600 hover:text-white transition-all duration-300 p-6 text-lg" asChild>
-                    <a href="https://linkedin.com" target="_blank">
-                      <Linkedin className="mr-3 h-6 w-6" />
-                      LinkedIn
-                    </a>
-                  </Button>
-                </motion.div>
-                
-                <motion.div whileHover={{ scale: 1.05, x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
-                  <Button variant="outline" className="w-full justify-start bg-gradient-to-r from-gray-50 to-gray-100 border-gray-300 hover:from-gray-800 hover:to-gray-900 hover:text-white transition-all duration-300 p-6 text-lg" asChild>
-                    <a href="https://github.com" target="_blank">
-                      <Github className="mr-3 h-6 w-6" />
-                      GitHub
-                    </a>
-                  </Button>
-                </motion.div>
-                
-                <motion.div whileHover={{ scale: 1.05, x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
-                  <Button variant="outline" className="w-full justify-start bg-gradient-to-r from-orange-50 to-orange-100 border-orange-300 hover:from-orange-500 hover:to-orange-600 hover:text-white transition-all duration-300 p-6 text-lg" asChild>
-                    <a href="https://codechef.com" target="_blank">
-                      <Code className="mr-3 h-6 w-6" />
-                      CodeChef
-                    </a>
-                  </Button>
-                </motion.div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Compétences Section */}
-      <section id="competences" className="py-20 px-6 bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50 relative overflow-hidden">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-40 floating"></div>
-        <div className="absolute bottom-20 left-20 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-40 floating" style={{animationDelay: '3s'}}></div>
-        
-        <div className="container mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.h2 
-              className="text-5xl font-bold text-center mb-16 gradient-text"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              Technologies & Compétences
-            </motion.h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-              {skills.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    delay: index * 0.1, 
-                    duration: 0.6,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{ 
-                    scale: 1.1, 
-                    rotateY: 10,
-                    z: 50
-                  }}
-                  className="perspective-1000"
-                >
-                  <Card className="text-center card-hover bg-gradient-to-br from-white to-gray-50 border-2 border-transparent hover:border-purple-200 shadow-lg">
-                    <CardContent className="p-8">
-                      <motion.div
-                        whileHover={{ rotate: 360, scale: 1.2 }}
-                        transition={{ duration: 0.6 }}
-                        className="h-16 w-16 mx-auto mb-4"
-                      >
-                        <img 
-                          src={skill.logo} 
-                          alt={skill.name}
-                          className="w-full h-full object-contain drop-shadow-lg"
-                        />
-                      </motion.div>
-                      <p className="font-semibold text-gray-800 text-lg">{skill.name}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-            
-            {/* Outils Section */}
-            <motion.h3 
-              className="text-3xl font-bold text-center mb-12 text-gray-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              Outils & Plateformes
-            </motion.h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {tools.map((tool, index) => (
-                <motion.div
-                  key={tool.name}
-                  initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    delay: (index * 0.1) + 0.8, 
-                    duration: 0.6,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{ 
-                    scale: 1.1, 
-                    rotateY: 10,
-                    z: 50
-                  }}
-                  className="perspective-1000"
-                >
-                  <Card className="text-center card-hover bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-transparent hover:border-blue-200 shadow-lg">
-                    <CardContent className="p-8">
-                      <motion.div
-                        whileHover={{ rotate: 360, scale: 1.2 }}
-                        transition={{ duration: 0.6 }}
-                        className="h-16 w-16 mx-auto mb-4"
-                      >
-                        <img 
-                          src={tool.logo} 
-                          alt={tool.name}
-                          className="w-full h-full object-contain drop-shadow-lg"
-                        />
-                      </motion.div>
-                      <p className="font-semibold text-gray-800 text-lg">{tool.name}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Projets Section */}
-      <section id="projets" className="py-20 px-6 bg-gradient-to-br from-white via-blue-50 to-purple-50 relative">
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-        
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.h2 
-              className="text-5xl font-bold text-center mb-16 gradient-text"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              Projets Réalisés
-            </motion.h2>
-            
-            <div className="grid md:grid-cols-3 gap-10">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.name}
-                  initial={{ opacity: 0, y: 50, rotateX: -30 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    delay: index * 0.2, 
-                    duration: 0.8,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{ 
-                    y: -10,
-                    rotateY: 5,
-                    scale: 1.02
-                  }}
-                  className="group cursor-pointer"
-                >
-                  <Card className="overflow-hidden card-hover bg-white shadow-xl border-0 group-hover:shadow-2xl transition-all duration-500">
-                    <div className="relative h-56 bg-gradient-to-br from-purple-500 via-blue-500 to-pink-500 overflow-hidden">
-                      <div className="absolute inset-0 bg-black/20"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          className="text-white text-6xl font-bold opacity-20"
-                          whileHover={{ scale: 1.2, rotate: 10 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          {index + 1}
-                        </motion.div>
-                      </div>
-                      <motion.div 
-                        className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full p-2"
-                        whileHover={{ scale: 1.1, rotate: 90 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <ExternalLink className="h-6 w-6 text-white" />
-                      </motion.div>
-                    </div>
-                    
-                    <CardHeader className="pb-4">
-                      <CardTitle className="text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors">
-                        {project.name}
-                      </CardTitle>
-                    </CardHeader>
-                    
-                    <CardContent>
-                      <p className="text-gray-600 mb-6 text-lg leading-relaxed">{project.description}</p>
-                      <div className="flex flex-wrap gap-3">
-                        {project.tech.map((tech, techIndex) => (
-                          <motion.span 
-                            key={tech} 
-                            className="px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 text-sm rounded-full font-medium border border-purple-200"
-                            initial={{ opacity: 0, scale: 0 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: (index * 0.2) + (techIndex * 0.1) + 0.5 }}
-                            whileHover={{ scale: 1.1 }}
-                          >
-                            {tech}
-                          </motion.span>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Certifications Section */}
-      <section id="certifications" className="py-16 px-6 bg-gray-50">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Certifications</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                <Card className="text-center card-hover bg-gradient-to-br from-white to-blue-50 shadow-xl">
-                  <CardContent className="p-8">
-                    <img 
-                      src="/assets/certifs/Professional-Cloud-Architect.png" 
-                      alt="Google Professional Cloud Architect"
-                      className="w-24 h-24 mx-auto mb-4 object-contain drop-shadow-lg"
-                    />
-                    <h3 className="font-bold text-xl mb-2 text-gray-800">Google Professional Cloud Architect</h3>
-                    <p className="text-gray-600 text-lg">2025</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <Card className="text-center card-hover bg-gradient-to-br from-white to-orange-50 shadow-xl">
-                  <CardContent className="p-8">
-                    <img 
-                      src="/assets/certifs/notion-essentiel-cloud-practitionner.png" 
-                      alt="AWS Cloud Practitioner"
-                      className="w-24 h-24 mx-auto mb-4 object-contain drop-shadow-lg"
-                    />
-                    <h3 className="font-bold text-xl mb-2 text-gray-800">AWS Cloud Practitioner</h3>
-                    <p className="text-gray-600 text-lg">2024</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6 }}
-              >
-                <Card className="text-center card-hover bg-gradient-to-br from-white to-green-50 shadow-xl">
-                  <CardContent className="p-8">
-                    <img 
-                      src="/assets/certifs/fondement-gestion-projet.png" 
-                      alt="Fondements Gestion de Projet"
-                      className="w-24 h-24 mx-auto mb-4 object-contain drop-shadow-lg"
-                    />
-                    <h3 className="font-bold text-xl mb-2 text-gray-800">Fondements Gestion de Projet</h3>
-                    <p className="text-gray-600 text-lg">2024</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Certifications Section - Nouvelle version */}
+      <CertificationsShowcase />
+      
+      {/* Client Success Section */}
+      <ClientSuccessSection />
 
       {/* Formation Section */}
       <section className="py-20 px-6 bg-gradient-to-br from-white via-green-50 to-blue-50 relative">
@@ -742,15 +771,13 @@ export default function Home() {
       </section>
 
       {/* Vision Section */}
-      <section id="vision" className="py-20 px-6 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 floating"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 floating" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 floating" style={{animationDelay: '4s'}}></div>
+      <section className="py-20 px-6 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-green-400 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
         </div>
         
-        <div className="container mx-auto relative z-10">
+        <div className="container mx-auto relative z-10 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -758,144 +785,227 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <motion.h2 
-              className="text-6xl font-bold mb-16 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              Vision & Mission
-            </motion.h2>
+            <h2 className="text-4xl font-bold mb-16 text-white">
+              Vision for Africa's Digital Future
+            </h2>
             
-            <div className="grid md:grid-cols-3 gap-12 mb-16">
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
               <motion.div 
-                className="text-center group"
+                className="text-center p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ y: -5 }}
               >
-                <motion.div
-                  className="relative mb-6"
-                  whileHover={{ rotateY: 180 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <div className="w-24 h-24 mx-auto bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-300">
-                    <Building className="h-12 w-12 text-white" />
-                  </div>
-                </motion.div>
-                <h3 className="text-2xl font-bold mb-4 text-purple-200">Data Center Cameroun</h3>
-                <p className="text-lg text-purple-100 leading-relaxed">Construire un data center pour l'autonomie numérique nationale</p>
+                <div className="w-16 h-16 mx-auto mb-6 bg-blue-500 rounded-xl flex items-center justify-center">
+                  <Server className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold mb-4">Cloud Infrastructure</h3>
+                <p className="text-blue-100 leading-relaxed">Building sovereign cloud infrastructure for Cameroon's digital independence</p>
               </motion.div>
               
               <motion.div 
-                className="text-center group"
+                className="text-center p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ delay: 0.4 }}
+                whileHover={{ y: -5 }}
               >
-                <motion.div
-                  className="relative mb-6"
-                  whileHover={{ rotateY: 180 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <div className="w-24 h-24 mx-auto bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300">
-                    <Satellite className="h-12 w-12 text-white" />
-                  </div>
-                </motion.div>
-                <h3 className="text-2xl font-bold mb-4 text-blue-200">Satellite Camerounais</h3>
-                <p className="text-lg text-blue-100 leading-relaxed">Lancer un satellite pour ancrer le pays dans l'industrie aérospatiale</p>
+                <div className="w-16 h-16 mx-auto mb-6 bg-green-500 rounded-xl flex items-center justify-center">
+                  <GraduationCap className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold mb-4">Tech Education</h3>
+                <p className="text-green-100 leading-relaxed">Training the next generation of African cloud architects and developers</p>
               </motion.div>
               
               <motion.div 
-                className="text-center group"
+                className="text-center p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.8, duration: 0.8 }}
-                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ delay: 0.6 }}
+                whileHover={{ y: -5 }}
               >
-                <motion.div
-                  className="relative mb-6"
-                  whileHover={{ rotateY: 180 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <div className="w-24 h-24 mx-auto bg-gradient-to-r from-indigo-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl group-hover:shadow-pink-500/50 transition-all duration-300">
-                    <Target className="h-12 w-12 text-white" />
-                  </div>
-                </motion.div>
-                <h3 className="text-2xl font-bold mb-4 text-pink-200">Ville Technologique</h3>
-                <p className="text-lg text-pink-100 leading-relaxed">Développer une ville intelligente inspirée de Samsung City</p>
+                <div className="w-16 h-16 mx-auto mb-6 bg-purple-500 rounded-xl flex items-center justify-center">
+                  <Rocket className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold mb-4">Innovation Hub</h3>
+                <p className="text-purple-100 leading-relaxed">Creating technology ecosystems that drive continental innovation</p>
               </motion.div>
             </div>
             
             <motion.p 
-              className="text-2xl text-white max-w-4xl mx-auto leading-relaxed font-light"
+              className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 1, duration: 0.8 }}
+              transition={{ delay: 0.8 }}
             >
-              Faire du Cameroun un leader africain en innovation et digitalisation, 
-              tout en formant une génération capable de relever les défis numériques du continent.
+              Empowering Africa's digital transformation through cloud-first architectures, 
+              sustainable technology solutions, and world-class technical education.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-6 bg-white">
-        <div className="container mx-auto">
+      <section id="contact" className="py-20 px-6 bg-gray-50">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-2xl mx-auto text-center"
+            transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-12 text-gray-800">Contact</h2>
-            <div className="space-y-6">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-center space-x-4">
-                    <Mail className="h-6 w-6 text-blue-600" />
-                    <span className="text-lg">cedric.nguendap@email.com</span>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.contact.title}</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mb-6"></div>
+              <p className="text-xl text-gray-600">
+                {t.contact.subtitle}
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-12">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">{t.contact.getInTouch}</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <Mail className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">{t.contact.email}</p>
+                      <p className="text-gray-600">cedric.nguendap@email.com</p>
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-center space-x-4">
-                    <Phone className="h-6 w-6 text-green-600" />
-                    <span className="text-lg">+237 6XX XXX XXX</span>
+                  
+                  <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                      <Phone className="h-6 w-6 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">{t.contact.phone}</p>
+                      <p className="text-gray-600">+237 6XX XXX XXX</p>
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-              <Button size="lg" className="w-full max-w-md">
-                Prendre rendez-vous
-              </Button>
+                  
+                  <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <Globe className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">{t.contact.location}</p>
+                      <p className="text-gray-600">{t.contact.locationValue}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-bold text-gray-900">{t.contact.scheduleConsultation}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-gray-600 mb-6">
+                      {t.contact.scheduleConsultationDesc}
+                    </p>
+                    
+                    <div className="space-y-3">
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                        {t.contact.scheduleReview}
+                      </Button>
+                      <Button variant="outline" className="w-full border-gray-300 text-gray-700 hover:bg-gray-50">
+                        {t.contact.downloadPortfolio}
+                      </Button>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-gray-200">
+                      <p className="text-sm text-gray-500 text-center mb-4">{t.contact.connectSocial}</p>
+                      <div className="flex justify-center space-x-4">
+                        <a href="#" className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center hover:bg-blue-200 transition-colors">
+                          <Linkedin className="h-5 w-5 text-blue-600" />
+                        </a>
+                        <a href="#" className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors">
+                          <Github className="h-5 w-5 text-gray-700" />
+                        </a>
+                        <a href="#" className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center hover:bg-green-200 transition-colors">
+                          <Mail className="h-5 w-5 text-green-600" />
+                        </a>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 px-6">
-        <div className="container mx-auto text-center">
-          <p className="mb-4">© 2025 Nguendap Bedjama Cédric. Tous droits réservés.</p>
-          <div className="flex justify-center space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              <Github className="h-6 w-6" />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              <Mail className="h-6 w-6" />
-            </a>
+      <footer className="bg-gray-900 text-white py-12 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
+                  <Cloud className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-xl font-bold">Cédric Nguendap</h3>
+              </div>
+              <p className="text-gray-400 mb-4 max-w-md">
+                {t.footer.description}
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <Github className="h-5 w-5" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors">
+                  <Mail className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">{t.footer.services}</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.cloudArchitecture}</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.fullStackDev}</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.devOps}</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.consulting}</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">{t.footer.expertise}</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.gcp}</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.microservices}</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.kubernetes}</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">{t.footer.modernApps}</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 pt-8 text-center">
+            <p className="text-gray-400">
+              {t.footer.copyright}
+            </p>
           </div>
         </div>
       </footer>

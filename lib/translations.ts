@@ -1,0 +1,222 @@
+export const translations = {
+  en: {
+    nav: {
+      about: 'About',
+      expertise: 'Expertise',
+      solutions: 'Solutions',
+      certifications: 'Certifications',
+      contact: 'Contact'
+    },
+    hero: {
+      title: 'Cédric Nguendap',
+      subtitle: 'Cloud Architect & Full-Stack Developer',
+      description: 'Designing scalable cloud architectures and building modern applications that drive digital transformation across Africa.',
+      viewSolutions: 'View Solutions',
+      getInTouch: 'Get in Touch',
+      certified: 'Google Cloud Certified'
+    },
+    about: {
+      title: 'About Me',
+      description1: 'As a Google Cloud Professional Architect and Full-Stack Developer, I specialize in designing and implementing scalable cloud solutions that drive digital transformation. With over 4 years of experience in cloud architecture, software development, and project management, I help organizations modernize their infrastructure and applications.',
+      description2: 'My expertise spans across Google Cloud Platform, modern web technologies, and enterprise-grade solutions. I\'m passionate about building the technological future of Cameroon and Africa through innovative cloud architectures and mentoring the next generation of developers.',
+      cloudArchitecture: 'Cloud Architecture',
+      cloudArchitectureDesc: 'Scalable & Secure Solutions',
+      fullStackDev: 'Full-Stack Development',
+      fullStackDevDesc: 'Modern Web Applications',
+      security: 'Security & Compliance',
+      securityDesc: 'Enterprise-Grade Security',
+      teamLeadership: 'Team Leadership',
+      teamLeadershipDesc: 'Mentoring & Training',
+      available: 'Available for Projects',
+      connectLinkedIn: 'Connect on LinkedIn',
+      viewGitHub: 'View GitHub Profile',
+      sendEmail: 'Send Email'
+    },
+    expertise: {
+      title: 'Technical Expertise',
+      subtitle: 'Specialized in Google Cloud Platform with expertise in modern development frameworks and enterprise solutions',
+      cloudPlatforms: 'Cloud Platforms',
+      developmentStack: 'Development Stack',
+      architecturePatterns: 'Architecture Patterns',
+      microservices: 'Microservices',
+      microservicesDesc: 'Scalable distributed systems',
+      serverless: 'Serverless',
+      serverlessDesc: 'Event-driven architectures',
+      securityFirst: 'Security-First',
+      securityFirstDesc: 'Zero-trust architecture',
+      performance: 'Performance',
+      performanceDesc: 'High-availability systems'
+    },
+    solutions: {
+      title: 'Cloud Solutions & Projects',
+      subtitle: 'Enterprise-grade cloud architectures and modern applications built for scale, security, and performance',
+      architectureTitle: 'Cloud Architecture Expertise',
+      architectureSubtitle: 'Designing resilient, scalable, and cost-effective cloud solutions',
+      multiCloud: 'Multi-Cloud',
+      multiCloudDesc: 'Hybrid architectures across GCP, AWS, and Azure',
+      autoScaling: 'Auto-Scaling',
+      autoScalingDesc: 'Elastic infrastructure that scales with demand',
+      devOps: 'DevOps/MLOps',
+      devOpsDesc: 'CI/CD pipelines and ML model deployment'
+    },
+    education: {
+      title: 'Education & Mentoring',
+      subtitle: 'Sharing knowledge and building the next generation of cloud architects in Africa',
+      assistantLecturer: 'Assistant Lecturer',
+      technicalInstructor: 'Technical Instructor',
+      cloudMentor: 'Cloud Mentor & Trainer',
+      practicalTraining: 'Practical Development Training',
+      practicalTrainingDesc: 'Hands-on cloud architecture workshop',
+      mentoringStudents: 'Mentoring Future Developers',
+      mentoringStudentsDesc: 'Building Africa\'s tech talent pipeline'
+    },
+    vision: {
+      title: 'Vision for Africa\'s Digital Future',
+      cloudInfrastructure: 'Cloud Infrastructure',
+      cloudInfrastructureDesc: 'Building sovereign cloud infrastructure for Cameroon\'s digital independence',
+      techEducation: 'Tech Education',
+      techEducationDesc: 'Training the next generation of African cloud architects and developers',
+      innovationHub: 'Innovation Hub',
+      innovationHubDesc: 'Creating technology ecosystems that drive continental innovation',
+      description: 'Empowering Africa\'s digital transformation through cloud-first architectures, sustainable technology solutions, and world-class technical education.'
+    },
+    contact: {
+      title: 'Let\'s Build Something Amazing',
+      subtitle: 'Ready to transform your business with cloud-native solutions?',
+      getInTouch: 'Get in Touch',
+      email: 'Email',
+      phone: 'Phone',
+      location: 'Location',
+      locationValue: 'Cameroon, Central Africa',
+      scheduleConsultation: 'Schedule a Consultation',
+      scheduleConsultationDesc: 'Let\'s discuss your cloud architecture needs and how we can accelerate your digital transformation.',
+      scheduleReview: 'Schedule Cloud Architecture Review',
+      downloadPortfolio: 'Download Portfolio PDF',
+      connectSocial: 'Connect on social platforms'
+    },
+    footer: {
+      description: 'Google Cloud Professional Architect & Full-Stack Developer building the future of cloud computing in Africa.',
+      services: 'Services',
+      cloudArchitecture: 'Cloud Architecture',
+      fullStackDev: 'Full-Stack Development',
+      devOps: 'DevOps & MLOps',
+      consulting: 'Technical Consulting',
+      expertise: 'Expertise',
+      gcp: 'Google Cloud Platform',
+      microservices: 'Microservices',
+      kubernetes: 'Kubernetes',
+      modernApps: 'Modern Web Apps',
+      copyright: '© 2025 Cédric Nguendap. All rights reserved. Built with Next.js & Google Cloud.'
+    }
+  },
+  fr: {
+    nav: {
+      about: 'À Propos',
+      expertise: 'Expertise',
+      solutions: 'Solutions',
+      certifications: 'Certifications',
+      contact: 'Contact'
+    },
+    hero: {
+      title: 'Cédric Nguendap',
+      subtitle: 'Architecte Cloud & Développeur Full-Stack',
+      description: 'Conception d\'architectures cloud évolutives et développement d\'applications modernes qui pilotent la transformation numérique en Afrique.',
+      viewSolutions: 'Voir les Solutions',
+      getInTouch: 'Me Contacter',
+      certified: 'Certifié Google Cloud'
+    },
+    about: {
+      title: 'À Propos de Moi',
+      description1: 'En tant qu\'Architecte Cloud Professionnel Google et Développeur Full-Stack, je me spécialise dans la conception et l\'implémentation de solutions cloud évolutives qui pilotent la transformation numérique. Avec plus de 4 ans d\'expérience en architecture cloud, développement logiciel et gestion de projet, j\'aide les organisations à moderniser leur infrastructure et leurs applications.',
+      description2: 'Mon expertise s\'étend sur Google Cloud Platform, les technologies web modernes et les solutions de niveau entreprise. Je suis passionné par la construction de l\'avenir technologique du Cameroun et de l\'Afrique grâce à des architectures cloud innovantes et au mentorat de la prochaine génération de développeurs.',
+      cloudArchitecture: 'Architecture Cloud',
+      cloudArchitectureDesc: 'Solutions Évolutives & Sécurisées',
+      fullStackDev: 'Développement Full-Stack',
+      fullStackDevDesc: 'Applications Web Modernes',
+      security: 'Sécurité & Conformité',
+      securityDesc: 'Sécurité de Niveau Entreprise',
+      teamLeadership: 'Leadership d\'Équipe',
+      teamLeadershipDesc: 'Mentorat & Formation',
+      available: 'Disponible pour Projets',
+      connectLinkedIn: 'Se Connecter sur LinkedIn',
+      viewGitHub: 'Voir le Profil GitHub',
+      sendEmail: 'Envoyer un Email'
+    },
+    expertise: {
+      title: 'Expertise Technique',
+      subtitle: 'Spécialisé dans Google Cloud Platform avec une expertise dans les frameworks de développement modernes et les solutions d\'entreprise',
+      cloudPlatforms: 'Plateformes Cloud',
+      developmentStack: 'Stack de Développement',
+      architecturePatterns: 'Modèles d\'Architecture',
+      microservices: 'Microservices',
+      microservicesDesc: 'Systèmes distribués évolutifs',
+      serverless: 'Sans Serveur',
+      serverlessDesc: 'Architectures pilotées par événements',
+      securityFirst: 'Sécurité d\'Abord',
+      securityFirstDesc: 'Architecture zéro confiance',
+      performance: 'Performance',
+      performanceDesc: 'Systèmes haute disponibilité'
+    },
+    solutions: {
+      title: 'Solutions Cloud & Projets',
+      subtitle: 'Architectures cloud de niveau entreprise et applications modernes conçues pour l\'évolutivité, la sécurité et la performance',
+      architectureTitle: 'Expertise en Architecture Cloud',
+      architectureSubtitle: 'Conception de solutions cloud résilientes, évolutives et rentables',
+      multiCloud: 'Multi-Cloud',
+      multiCloudDesc: 'Architectures hybrides sur GCP, AWS et Azure',
+      autoScaling: 'Auto-Scaling',
+      autoScalingDesc: 'Infrastructure élastique qui s\'adapte à la demande',
+      devOps: 'DevOps/MLOps',
+      devOpsDesc: 'Pipelines CI/CD et déploiement de modèles ML'
+    },
+    education: {
+      title: 'Formation & Mentorat',
+      subtitle: 'Partage de connaissances et formation de la prochaine génération d\'architectes cloud en Afrique',
+      assistantLecturer: 'Enseignant Assistant',
+      technicalInstructor: 'Instructeur Technique',
+      cloudMentor: 'Mentor & Formateur Cloud',
+      practicalTraining: 'Formation Pratique en Développement',
+      practicalTrainingDesc: 'Atelier pratique d\'architecture cloud',
+      mentoringStudents: 'Mentorat des Futurs Développeurs',
+      mentoringStudentsDesc: 'Construction du pipeline de talents tech africains'
+    },
+    vision: {
+      title: 'Vision pour l\'Avenir Numérique de l\'Afrique',
+      cloudInfrastructure: 'Infrastructure Cloud',
+      cloudInfrastructureDesc: 'Construction d\'une infrastructure cloud souveraine pour l\'indépendance numérique du Cameroun',
+      techEducation: 'Éducation Tech',
+      techEducationDesc: 'Formation de la prochaine génération d\'architectes cloud et développeurs africains',
+      innovationHub: 'Hub d\'Innovation',
+      innovationHubDesc: 'Création d\'écosystèmes technologiques qui stimulent l\'innovation continentale',
+      description: 'Autonomiser la transformation numérique de l\'Afrique grâce à des architectures cloud-first, des solutions technologiques durables et une éducation technique de classe mondiale.'
+    },
+    contact: {
+      title: 'Construisons Quelque Chose d\'Extraordinaire',
+      subtitle: 'Prêt à transformer votre entreprise avec des solutions cloud-natives ?',
+      getInTouch: 'Entrer en Contact',
+      email: 'Email',
+      phone: 'Téléphone',
+      location: 'Localisation',
+      locationValue: 'Cameroun, Afrique Centrale',
+      scheduleConsultation: 'Planifier une Consultation',
+      scheduleConsultationDesc: 'Discutons de vos besoins en architecture cloud et comment nous pouvons accélérer votre transformation numérique.',
+      scheduleReview: 'Planifier une Revue d\'Architecture Cloud',
+      downloadPortfolio: 'Télécharger le Portfolio PDF',
+      connectSocial: 'Se connecter sur les réseaux sociaux'
+    },
+    footer: {
+      description: 'Architecte Cloud Professionnel Google & Développeur Full-Stack construisant l\'avenir de l\'informatique cloud en Afrique.',
+      services: 'Services',
+      cloudArchitecture: 'Architecture Cloud',
+      fullStackDev: 'Développement Full-Stack',
+      devOps: 'DevOps & MLOps',
+      consulting: 'Conseil Technique',
+      expertise: 'Expertise',
+      gcp: 'Google Cloud Platform',
+      microservices: 'Microservices',
+      kubernetes: 'Kubernetes',
+      modernApps: 'Applications Web Modernes',
+      copyright: '© 2025 Cédric Nguendap. Tous droits réservés. Construit avec Next.js & Google Cloud.'
+    }
+  }
+}
