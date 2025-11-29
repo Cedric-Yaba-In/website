@@ -89,8 +89,8 @@ export const translations = {
       location: 'Location',
       locationValue: 'Cameroon, Central Africa',
       scheduleConsultation: 'Schedule a Consultation',
-      scheduleConsultationDesc: 'Let\'s discuss your cloud architecture needs and how we can accelerate your digital transformation.',
-      scheduleReview: 'Schedule Cloud Architecture Review',
+      scheduleConsultationDesc: 'Let\'s discuss your cloud architecture needs, custom solution development, and how we can accelerate your digital transformation.',
+      scheduleReview: 'Schedule Review',
       downloadPortfolio: 'Download Portfolio PDF',
       connectSocial: 'Connect on social platforms'
     },
@@ -199,8 +199,8 @@ export const translations = {
       location: 'Localisation',
       locationValue: 'Cameroun, Afrique Centrale',
       scheduleConsultation: 'Planifier une Consultation',
-      scheduleConsultationDesc: 'Discutons de vos besoins en architecture cloud et comment nous pouvons accélérer votre transformation numérique.',
-      scheduleReview: 'Planifier une Revue d\'Architecture Cloud',
+      scheduleConsultationDesc: 'Discutons de vos besoins en architecture cloud, développement de solutions spécialisées, et comment nous pouvons accélérer votre transformation numérique.',
+      scheduleReview: 'Planifier une Revue',
       downloadPortfolio: 'Télécharger le Portfolio PDF',
       connectSocial: 'Se connecter sur les réseaux sociaux'
     },

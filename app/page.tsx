@@ -172,12 +172,15 @@ export default function Home() {
                 {t.hero.title}
               </h1>
               
-              <div className="flex items-center space-x-3 mb-6">
+              <div className="flex flex-wrap items-center gap-3 mb-6">
                 <div className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
                   Cloud Architect
                 </div>
                 <div className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
                   Full-Stack Developer
+                </div>
+                <div className="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                  {locale === 'fr' ? 'Gestionnaire de Projet' : 'Project Manager'}
                 </div>
               </div>
               
@@ -620,23 +623,18 @@ export default function Home() {
                           </div>
                         </div>
                         
-                        {/* Image spéciale pour l'architecture AWS */}
-                        {solution.title === 'Architecture AWS SmartestLotto' && (
-                          <div className="mb-4">
-                            <h4 className="text-sm font-semibold text-gray-900 mb-2">{locale === 'fr' ? 'Diagramme d\'Architecture' : 'Architecture Diagram'}</h4>
-                            <div 
-                              className="relative group cursor-pointer"
+                        {/* Bouton pour voir l'architecture AWS */}
+                        {(solution.title.includes('AWS SmartestLotto') || solution.title.includes('Architecture AWS')) && (
+                          <div className="pt-2">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="w-full mb-2" 
                               onClick={() => setIsImageModalOpen(true)}
                             >
-                              <img 
-                                src="/assets/autres/architecture-aws-smartestlotto.png" 
-                                alt="Architecture AWS SmartestLotto"
-                                className="w-full h-48 object-contain bg-gray-50 rounded-lg border border-gray-200 hover:border-yellow-300 transition-all"
-                              />
-                              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 rounded-lg transition-all flex items-center justify-center">
-                                <span className="text-white opacity-0 group-hover:opacity-100 text-sm font-medium">{locale === 'fr' ? 'Cliquer pour agrandir' : 'Click to enlarge'}</span>
-                              </div>
-                            </div>
+                              <Database className="w-4 h-4 mr-2" />
+                              {locale === 'fr' ? 'Voir l\'Architecture' : 'View Architecture'}
+                            </Button>
                           </div>
                         )}
                         
