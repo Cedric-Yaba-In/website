@@ -1,0 +1,15 @@
+Placez vos images dans ce dossier :
+
+- Photo de profil professionnelle (profile.jpg)
+- Screenshots des projets :
+  * project1.jpg (PaieCashPlay)
+  * project2.jpg (SDK Games Africa) 
+  * project3.jpg (AGRO-PME)
+- Badges de certifications :
+  * gcp-architect.png
+  * aws-practitioner.png
+  * google-edu.png
+- Photos des étudiants encadrés
+- Illustrations technologiques
+
+Format recommandé : JPG/PNG, résolution optimale pour le web
