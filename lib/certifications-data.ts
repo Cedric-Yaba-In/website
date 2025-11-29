@@ -111,5 +111,7 @@ export const clientSuccessMetrics = {
   projectSuccessRate: '95%',
   teamsTrained: '200+',
   clientsServed: '50+',
-  productivityGain: '+60%'
+  productivityGain: '+60%',
+  costReduction: '30-50%',
+  infrastructureUptime: '99.9%'
 }

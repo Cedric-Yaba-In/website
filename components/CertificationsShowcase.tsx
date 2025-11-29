@@ -145,14 +145,14 @@ export default function CertificationsShowcase() {
                     {/* Actions */}
                     <div className="flex gap-2 pt-2">
                       {cert.certificate && (
-                        <Button variant="outline" size="sm" className="flex-1" asChild>
+                        <Button variant="outline" className="flex-1" asChild>
                           <a href={cert.certificate} target="_blank">
                             <Download className="w-4 h-4 mr-2" />
                             Certificat
                           </a>
                         </Button>
                       )}
-                      <Button variant="outline" size="sm" className="flex-1" asChild>
+                      <Button variant="outline" className="flex-1" asChild>
                         <a href={cert.badge} target="_blank">
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Badge

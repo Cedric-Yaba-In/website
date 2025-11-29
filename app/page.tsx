@@ -628,7 +628,6 @@ export default function Home() {
                           <div className="pt-2">
                             <Button 
                               variant="outline" 
-                              size="sm" 
                               className="w-full mb-2" 
                               onClick={() => setIsImageModalOpen(true)}
                             >
@@ -640,7 +639,7 @@ export default function Home() {
                         
                         {solution.link && (
                           <div className="pt-2">
-                            <Button variant="outline" size="sm" className="w-full" asChild>
+                            <Button variant="outline" className="w-full" asChild>
                               <a href={solution.link} target="_blank" rel="noopener noreferrer">
                                 <ExternalLink className="w-4 h-4 mr-2" />
                                 {locale === 'fr' ? 'Voir le projet' : 'View Project'}

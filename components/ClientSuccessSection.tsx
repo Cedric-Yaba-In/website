@@ -198,7 +198,7 @@ export default function ClientSuccessSection() {
                       <Clock className="w-4 h-4 mr-1" />
                       {story.timeline}
                     </div>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline">
                       Voir le cas d'étude
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Button>

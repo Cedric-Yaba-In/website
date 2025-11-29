@@ -75,7 +75,7 @@ export default function CVAnalysisComponent() {
         {/* Analysis Grid */}
         <div className="grid lg:grid-cols-2 gap-8 mb-16">
           {Object.entries(cvAnalysisTemplate).map(([key, section], index) => {
-            const StatusIcon = statusIcons[section.status]
+            const StatusIcon = statusIcons[section.status as keyof typeof statusIcons]
             
             return (
               <motion.div
@@ -91,7 +91,7 @@ export default function CVAnalysisComponent() {
                       <CardTitle className="text-lg font-bold text-gray-900">
                         {section.section}
                       </CardTitle>
-                      <div className={`p-2 rounded-full ${statusColors[section.status]}`}>
+                      <div className={`p-2 rounded-full ${statusColors[section.status as keyof typeof statusColors]}`}>
                         <StatusIcon className="w-5 h-5" />
                       </div>
                     </div>
